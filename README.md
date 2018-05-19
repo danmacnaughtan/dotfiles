@@ -1,8 +1,8 @@
 # dotfiles
 
-Here is my collection of dotfiles.
+My collection of dotfiles.
 
-## Storing dotfiles
+### A note on storing dotfiles
 
 A practical git-only technique for managing dotfiles using git I learned about
 [here](https://news.ycombinator.com/item?id=11071754) and
