@@ -30,7 +30,7 @@ Plugin 'wincent/terminus'
 " Ruby support
 Plugin 'vim-ruby/vim-ruby'
 " JavaScript support
-Plugin 'sheerun/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'othree/javascript-libraries-syntax.vim'
