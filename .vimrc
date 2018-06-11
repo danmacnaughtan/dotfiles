@@ -48,8 +48,8 @@ let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_min_num_of_chars_for_completion=4
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
 " find the right python for the completion
-"let g:ycm_python_binary_path = 'python'
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = 'python'
+"let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 
 "---------- Ruby Config ----------
@@ -64,6 +64,8 @@ autocmd FileType ruby,eruby,html set tabstop=2 softtabstop=2 shiftwidth=2
 "---------- JavaScript Config ----------
 " Basic omnifunc autocompletion for javascript
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" Front-end devs seem to like using tabs with 2 spaces
+autocmd FileType javascript,json,css set tabstop=2 softtabstop=2 shiftwidth=2
 " Enabled by default. flip the value to make completion matches case insensitive
 let g:vimjs#casesensistive = 1
 " Disabled by default. Enabling this will let vim complete matches at any location
@@ -71,6 +73,8 @@ let g:vimjs#casesensistive = 1
 let g:vimjs#smartcomplete = 1
 " Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
 let g:vimjs#chromeapis = 1
+" disable json syntax conceal
+let g:vim_json_syntax_conceal = 0
 
 
 "---------- Custom Keys ----------
@@ -95,7 +99,7 @@ map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
 
 "---------- Makefile Config ----------
 " Remove expandtab for makefiles
-au BufNewFile Makefile set noexpandtab
+autocmd FileType Makefile set noexpandtab
 
 
 "---------- Swift Config ----------
