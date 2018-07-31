@@ -122,9 +122,14 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 "---------- General Config ---------
 " use the system clipboard
 " for systems using the '+' register
-set clipboard=unnamedplus 
+"set clipboard=unnamedplus 
 " for systems using the '*' register
 "set clipboard=unnamed
+if substitute(system('uname'), '\n', '', '') == 'Darwin'
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 " remove swap file
 set noswapfile
