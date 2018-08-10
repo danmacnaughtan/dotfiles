@@ -148,6 +148,9 @@ set smarttab
 set cindent
 filetype indent on
 
+set hlsearch
+set cursorline
+
 " improve backspace behavior
 set backspace=indent,eol,start
 
