@@ -154,6 +154,10 @@ set cursorline
 " improve backspace behavior
 set backspace=indent,eol,start
 
+" Disable middle mouse paste
+map <MiddleMouse> <Nop>
+imap <MiddleMouse> <Nop>
+
 
 "---------- Themes/Appearance ----------
 set number
