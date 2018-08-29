@@ -115,6 +115,9 @@ let python_highlight_all=1
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
 
+" Favor Python 3 syntax
+let g:syntastic_python_python_exec = 'python3'
+
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
