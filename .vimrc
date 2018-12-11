@@ -17,7 +17,8 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/syntastic'
 " autocomplete
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
-" and execute ./install.sh --clang-completer 
+" and execute ./install.sh --clang-completer
+" on arch use ./install.sh --clang-completer --system-libclang
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
@@ -35,6 +36,9 @@ Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin '1995eaton/vim-better-javascript-completion'
+Plugin 'posva/vim-vue'
+" Django
+Plugin 'vim-scripts/django.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -42,14 +46,18 @@ filetype plugin indent on " required
 
 
 "-------- Configuring auto-complete plugin --------
-let g:ycm_seed_identifiers_with_syntax=1 " not sure what this is for
+let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_min_num_of_chars_for_completion=4
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
 " find the right python for the completion
 let g:ycm_python_binary_path = 'python'
-"let g:ycm_python_binary_path = '/usr/local/bin/python3'
+
+
+"---------- Rust Config ----------
+let g:ycm_rust_src_path=system('rustc --print sysroot')+'/lib/rustlib/src/rust/src'
 
 
 "---------- Ruby Config ----------
@@ -58,14 +66,16 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " For rails style using tabs with 2 spaces
-autocmd FileType ruby,eruby,html set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 
 
 "---------- JavaScript Config ----------
 " Basic omnifunc autocompletion for javascript
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Front-end devs seem to like using tabs with 2 spaces
-autocmd FileType javascript,json,css set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType javascript,json,css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
+" Vue specific highlighting fix
+autocmd FileType vue syntax sync fromstart
 " Enabled by default. flip the value to make completion matches case insensitive
 let g:vimjs#casesensistive = 1
 " Disabled by default. Enabling this will let vim complete matches at any location
@@ -75,6 +85,10 @@ let g:vimjs#smartcomplete = 1
 let g:vimjs#chromeapis = 1
 " disable json syntax conceal
 let g:vim_json_syntax_conceal = 0
+
+
+"---------- Django Config ----------
+autocmd FileType htmldjango set tabstop=2 softtabstop=2 shiftwidth=2
 
 
 "---------- Custom Keys ----------
@@ -95,6 +109,8 @@ map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
 "---------- Custom Commnads ----------
 " Here is a command for autoformatting json
 :command FormatJSON execute '%!python -m json.tool' | w
+" Command for quickly setting django-template filetype
+:command DjangoSetFiletype execute ':setfiletype htmldjango'
 
 
 "---------- Makefile Config ----------
@@ -115,11 +131,21 @@ let python_highlight_all=1
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
 
-" Favor Python 3 syntax
+" Favour Python 3 syntax
 let g:syntastic_python_python_exec = 'python3'
 
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+
+
+"---------- Docker Config ----------
+" Syntax highlighting for Dockerfiles with custom names
+" (e.g., 'Dockerfile-foobar')
+au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
+
+
+"---------- NASM Config ----------
+au BufRead,BufNewFile *.asm set filetype=nasm
 
 
 "---------- General Config ---------
@@ -151,7 +177,10 @@ set smarttab
 set cindent
 filetype indent on
 
+" Highlight search results
 set hlsearch
+
+" Show the cursor line
 set cursorline
 
 " improve backspace behavior
