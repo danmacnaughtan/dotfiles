@@ -19,6 +19,7 @@ Plugin 'scrooloose/syntastic'
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
 " and execute ./install.sh --clang-completer
 " on arch use ./install.sh --clang-completer --system-libclang
+" --java-completer --rust-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
@@ -39,6 +40,8 @@ Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'posva/vim-vue'
 " Django
 Plugin 'vim-scripts/django.vim'
+" Better C++ syntax highlighting
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -50,10 +53,11 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_min_num_of_chars_for_completion=4
-let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
 " find the right python for the completion
-let g:ycm_python_binary_path = 'python'
+let g:ycm_python_binary_path='/usr/bin/python'
 
 
 "---------- Rust Config ----------
@@ -146,6 +150,16 @@ au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 
 "---------- NASM Config ----------
 au BufRead,BufNewFile *.asm set filetype=nasm
+
+
+"---------- clang Config ----------
+let g:clang_complete_macros = 1
+
+
+"---------- C++ Config ----------
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_template_highlight = 1
 
 
 "---------- General Config ---------
