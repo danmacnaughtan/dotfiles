@@ -25,6 +25,7 @@ Plugin 'rdnetto/YCM-Generator'
 " filesystem
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+"Plugin 'junegunn/fzf.vim'
 " Swift support
 Plugin 'toyamarinyon/vim-swift'
 " Vim enhanced (with mouse improvments)
