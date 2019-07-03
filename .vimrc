@@ -42,6 +42,10 @@ Plugin 'posva/vim-vue'
 Plugin 'vim-scripts/django.vim'
 " Better C++ syntax highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
+" Indent lines
+Plugin 'Yggdroot/indentLine'
+" Status line
+Plugin 'itchyny/lightline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -56,8 +60,13 @@ let g:ycm_min_num_of_chars_for_completion=4
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
+
 " find the right python for the completion
-let g:ycm_python_binary_path='/usr/bin/python'
+if substitute(system('uname'), '\n', '', '') == 'Darwin'
+    let g:ycm_python_binary_path='python3'
+else
+    let g:ycm_python_binary_path='python'
+endif
 
 
 "---------- Rust Config ----------
@@ -162,6 +171,12 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
 
+"---------- Visible tab indents ---------
+" toggle with :IndentLinesToggle
+"let g:indentLine_enabled = 0
+"```set list listchars=tab:»·,trail:·,nbsp:· " Whitespace```
+
+
 "---------- General Config ---------
 " use the system clipboard
 " for systems using the '+' register
@@ -204,6 +219,10 @@ set backspace=indent,eol,start
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
 
+" Keeps statusline visible when using itchyny/lightline.vim
+set laststatus=2
+" set ruler
+
 
 "---------- Themes/Appearance ----------
 set number
@@ -214,4 +233,3 @@ set background=dark
 " Jellybeans
 let g:jellybeans_overrides = {'background':{'ctermbg':'none','256ctermbg':'none'}}
 colorscheme jellybeans
-
