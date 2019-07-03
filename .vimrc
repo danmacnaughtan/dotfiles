@@ -132,6 +132,11 @@ map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
 autocmd FileType Makefile set noexpandtab
 
 
+"---------- ASM Config ----------
+let asmsyntax="nasm"
+let g:syntastic_nasm_nasm_args = '-f elf32'
+
+
 "---------- Swift Config ----------
 " syntastic for swift
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
