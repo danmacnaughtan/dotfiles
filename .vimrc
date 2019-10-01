@@ -25,6 +25,7 @@ Plugin 'rdnetto/YCM-Generator'
 " filesystem
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+"Plugin 'junegunn/fzf.vim'
 " Swift support
 Plugin 'toyamarinyon/vim-swift'
 " Vim enhanced (with mouse improvments)
@@ -130,6 +131,11 @@ map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
 "---------- Makefile Config ----------
 " Remove expandtab for makefiles
 autocmd FileType Makefile set noexpandtab
+
+
+"---------- ASM Config ----------
+let asmsyntax="nasm"
+let g:syntastic_nasm_nasm_args = '-f elf32'
 
 
 "---------- Swift Config ----------
