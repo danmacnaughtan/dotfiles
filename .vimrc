@@ -24,8 +24,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-"Plugin 'junegunn/fzf.vim'
 " Swift support
 Plugin 'toyamarinyon/vim-swift'
 " Vim enhanced (with mouse improvments)
@@ -96,7 +94,8 @@ let g:vimjs#casesensistive = 1
 " Disabled by default. Enabling this will let vim complete matches at any location
 " e.g. typing 'ocument' will suggest 'document' if enabled.
 let g:vimjs#smartcomplete = 1
-" Disabled by default. Toggling this will enable completion for a number of Chrome's JavaScript extension APIs
+" Disabled by default. Toggling this will enable completion for a number of
+" Chrome's JavaScript extension APIs
 let g:vimjs#chromeapis = 1
 " disable json syntax conceal
 let g:vim_json_syntax_conceal = 0
@@ -119,6 +118,9 @@ map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
 " toggle ycm on and off
 "nnoremap <leader>y :let g:ycm_auto_trigger=0<CR> " turn off ycm
 "nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR> " turn on ycm
+
+" Start FZF (if installed)
+map <C-p> :FZF<CR>
 
 
 "---------- Custom Commnads ----------
@@ -177,7 +179,7 @@ let g:clang_complete_macros = 1
 "let g:cpp_class_decl_highlight = 1
 "let g:cpp_experimental_template_highlight = 1
 :command ClangFormat execute '%!/usr/bin/clang-format -style=file'
-autocmd FileType h,hpp,c,cpp,cc set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
 
 "---------- Visible tab indents ---------
@@ -196,6 +198,8 @@ if substitute(system('uname'), '\n', '', '') == 'Darwin'
     set clipboard=unnamed
 else
     set clipboard=unnamedplus
+    " Prevent copied text from being removed from the clipboard when vim
+    " closes
     autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
 endif
 
