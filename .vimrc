@@ -45,6 +45,8 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'Yggdroot/indentLine'
 " Status line
 Plugin 'itchyny/lightline.vim'
+" Better search
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -236,6 +238,10 @@ imap <MiddleMouse> <Nop>
 " Keeps statusline visible when using itchyny/lightline.vim
 set laststatus=2
 " set ruler
+
+" Working without word wrap
+set nowrap
+set sidescroll=5
 
 
 "---------- Themes/Appearance ----------
