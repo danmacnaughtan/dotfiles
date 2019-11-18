@@ -32,11 +32,11 @@ Plugin 'wincent/terminus'
 Plugin 'vim-ruby/vim-ruby'
 " JavaScript support
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin '1995eaton/vim-better-javascript-completion'
+"Plugin 'othree/javascript-libraries-syntax.vim'
+"Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'posva/vim-vue'
+Plugin 'mxw/vim-jsx'
 " Django
 Plugin 'vim-scripts/django.vim'
 " Better C++ syntax highlighting
@@ -47,6 +47,10 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'itchyny/lightline.vim'
 " Better search
 Plugin 'junegunn/fzf.vim'
+" Emojis
+"Plugin 'junegunn/vim-emoji'
+" Color schemes
+"Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -86,9 +90,10 @@ autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 
 "---------- JavaScript Config ----------
 " Basic omnifunc autocompletion for javascript
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Front-end devs seem to like using tabs with 2 spaces
-autocmd FileType javascript,json,css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType javascript,json set tabstop=4 softtabstop=4 shiftwidth=4
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
 " Enabled by default. flip the value to make completion matches case insensitive
@@ -243,13 +248,16 @@ set laststatus=2
 set nowrap
 set sidescroll=5
 
+" Disable comment auto-formatting
+autocmd FileType * setlocal formatoptions-=cro
+
 
 "---------- Themes/Appearance ----------
+set t_Co=256
 set number
 syntax on
 syntax enable
 set background=dark
 
-" Jellybeans
 let g:jellybeans_overrides = {'background':{'ctermbg':'none','256ctermbg':'none'}}
 colorscheme jellybeans
