@@ -51,6 +51,7 @@ Plugin 'junegunn/fzf.vim'
 "Plugin 'junegunn/vim-emoji'
 " Color schemes
 "Plugin 'flazz/vim-colorschemes'
+Plugin 'psf/black'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -119,14 +120,18 @@ map <leader>h :YcmCompleter GetDoc<CR>
 map <leader>t :NERDTreeToggle<CR>
 
 " Here is my writting notes mode, on and off
-map <leader>w :set tw=80<CR>:set linebreak<CR>:set spell spelllang=en_us<CR>
-map <leader>W :set tw=0<CR>:set nolinebreak<CR>:set nospell<CR>
+set tw=90
+map <leader>w :set tw=90<CR>:set linebreak<CR>:set spell spelllang=en_us<CR>
+map <leader>W :set tw=90<CR>:set nolinebreak<CR>:set nospell<CR>
 
 " toggle ycm on and off
 "nnoremap <leader>y :let g:ycm_auto_trigger=0<CR> " turn off ycm
 "nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR> " turn on ycm
 
 " Start FZF (if installed)
+if substitute(system('uname'), '\n', '', '') == 'Darwin'
+    set rtp+=/usr/local/opt/fzf
+endif
 map <C-p> :FZF<CR>
 
 
@@ -135,6 +140,9 @@ map <C-p> :FZF<CR>
 :command FormatJSON execute '%!python -m json.tool' | w
 " Command for quickly setting django-template filetype
 :command DjangoSetFiletype execute ':setfiletype htmldjango'
+
+" YCM FixIt command
+:command FixIt execute ':YcmCompleter FixIt'
 
 
 "---------- Makefile Config ----------
@@ -189,10 +197,17 @@ let g:clang_complete_macros = 1
 autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
 
+"---------- Black ----------
+
+let g:black_skip_string_normalization = 1
+
+
 "---------- Visible tab indents ---------
 " toggle with :IndentLinesToggle
 "let g:indentLine_enabled = 0
 "```set list listchars=tab:»·,trail:·,nbsp:· " Whitespace```
+" Disable conceallevel for markdown files
+autocmd FileType markdown let g:indentLine_setConceal = 0
 
 
 "---------- General Config ---------
