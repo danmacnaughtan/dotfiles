@@ -19,7 +19,7 @@ Plugin 'scrooloose/syntastic'
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
 " and execute ./install.sh --clang-completer
 " on arch use ./install.sh --clang-completer --system-libclang
-" --java-completer --rust-completer
+" --java-completer --rust-completer --go-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
@@ -52,6 +52,8 @@ Plugin 'junegunn/fzf.vim'
 " Color schemes
 "Plugin 'flazz/vim-colorschemes'
 Plugin 'psf/black'
+Plugin 'cespare/vim-toml'
+Plugin 'rhysd/vim-crystal'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -198,8 +200,9 @@ autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
 
 "---------- Black ----------
-
+let g:black_linelength = 99
 let g:black_skip_string_normalization = 1
+autocmd BufWritePre *.py execute ':Black'
 
 
 "---------- Visible tab indents ---------
