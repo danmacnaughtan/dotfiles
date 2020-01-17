@@ -18,8 +18,8 @@ Plugin 'scrooloose/syntastic'
 " autocomplete
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
 " and execute ./install.sh --clang-completer
-" on arch use ./install.sh --clang-completer --system-libclang
-" --java-completer --rust-completer --go-completer
+" on arch use ./install.py --clang-completer --system-libclang
+" --java-completer --rust-completer --go-completer --ts-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
@@ -54,6 +54,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'psf/black'
 Plugin 'cespare/vim-toml'
 Plugin 'rhysd/vim-crystal'
+" Better Markdown?
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -96,7 +99,8 @@ autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Front-end devs seem to like using tabs with 2 spaces
 autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
-autocmd FileType javascript,json set tabstop=4 softtabstop=4 shiftwidth=4
+autocmd FileType json set tabstop=4 softtabstop=4 shiftwidth=4
+autocmd FileType javascript set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
 " Enabled by default. flip the value to make completion matches case insensitive
@@ -209,8 +213,11 @@ autocmd BufWritePre *.py execute ':Black'
 " toggle with :IndentLinesToggle
 "let g:indentLine_enabled = 0
 "```set list listchars=tab:»·,trail:·,nbsp:· " Whitespace```
+
+"---------- Markdown ---------
 " Disable conceallevel for markdown files
 autocmd FileType markdown let g:indentLine_setConceal = 0
+let g:vim_markdown_folding_disabled = 1
 
 
 "---------- General Config ---------
