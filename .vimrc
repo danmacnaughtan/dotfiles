@@ -235,6 +235,9 @@ else
     autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
 endif
 
+" Ugh Folding...
+set nofoldenable
+
 " remove swap file
 set noswapfile
 
