@@ -52,6 +52,7 @@ Plugin 'junegunn/fzf.vim'
 " Color schemes
 "Plugin 'flazz/vim-colorschemes'
 Plugin 'psf/black'
+Plugin 'fisadev/vim-isort'
 Plugin 'cespare/vim-toml'
 Plugin 'rhysd/vim-crystal'
 " Better Markdown?
@@ -209,6 +210,11 @@ let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
 
 
+"---------- isort ----------
+let g:vim_isort_map = ''
+autocmd BufWritePre *.py execute ':Isort'
+
+
 "---------- Visible tab indents ---------
 " toggle with :IndentLinesToggle
 "let g:indentLine_enabled = 0
@@ -234,9 +240,6 @@ else
     " closes
     autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
 endif
-
-" Ugh Folding...
-set nofoldenable
 
 " remove swap file
 set noswapfile
