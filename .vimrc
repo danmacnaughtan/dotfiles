@@ -101,7 +101,8 @@ autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 " Front-end devs seem to like using tabs with 2 spaces
 autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType json set tabstop=4 softtabstop=4 shiftwidth=4
-autocmd FileType javascript set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+"autocmd FileType javascript set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
 " Enabled by default. flip the value to make completion matches case insensitive
