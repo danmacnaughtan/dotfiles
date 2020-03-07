@@ -211,6 +211,10 @@ let g:black_linelength = 99
 let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
 
+" Use the following to allow post save and use any pyproject.toml config
+":command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
+"autocmd BufWritePost *.py execute ':CustomBlack'
+
 
 "---------- isort ----------
 let g:vim_isort_map = ''
