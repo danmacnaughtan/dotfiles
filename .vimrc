@@ -11,11 +11,15 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Add all your plugins here
 
-" python syntax checking
+" Python syntax checking
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/syntastic'
-" autocomplete
+" Python auto-formatting
+Plugin 'psf/black'
+Plugin 'fisadev/vim-isort'
+Plugin 'cespare/vim-toml'
+" Autocomplete
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
 " and execute ./install.sh --clang-completer
 " on arch use ./install.py --clang-completer --system-libclang
@@ -24,41 +28,28 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 " filesystem
 Plugin 'scrooloose/nerdtree'
-" Swift support
-Plugin 'toyamarinyon/vim-swift'
 " Vim enhanced (with mouse improvments)
 Plugin 'wincent/terminus'
-" Ruby support
+" Ruby/Crystal support
 Plugin 'vim-ruby/vim-ruby'
-" JavaScript support
+Plugin 'rhysd/vim-crystal'
+" JavaScript/JSON/Vue/SCSS support
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
-"Plugin 'othree/javascript-libraries-syntax.vim'
-"Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'posva/vim-vue'
 Plugin 'mxw/vim-jsx'
+Plugin 'cakebaker/scss-syntax.vim'
 " Django
 Plugin 'vim-scripts/django.vim'
-" Better C++ syntax highlighting
-"Plugin 'octol/vim-cpp-enhanced-highlight'
 " Indent lines
 Plugin 'Yggdroot/indentLine'
 " Status line
 Plugin 'itchyny/lightline.vim'
 " Better search
 Plugin 'junegunn/fzf.vim'
-" Emojis
-"Plugin 'junegunn/vim-emoji'
-" Color schemes
-"Plugin 'flazz/vim-colorschemes'
-Plugin 'psf/black'
-Plugin 'fisadev/vim-isort'
-Plugin 'cespare/vim-toml'
-Plugin 'rhysd/vim-crystal'
-" Better Markdown?
+" Better Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'cakebaker/scss-syntax.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -97,8 +88,6 @@ autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 
 
 "---------- JavaScript Config ----------
-" Basic omnifunc autocompletion for javascript
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Front-end devs seem to like using tabs with 2 spaces
 autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType json set tabstop=4 softtabstop=4 shiftwidth=4
@@ -145,7 +134,7 @@ map <C-p> :FZF<CR>
 
 
 "---------- Custom Commnads ----------
-" Here is a command for autoformatting json
+" Here is a command for auto-formatting json
 :command FormatJSON execute '%!python -m json.tool' | w
 " Command for quickly setting django-template filetype
 :command DjangoSetFiletype execute ':setfiletype htmldjango'
@@ -164,11 +153,6 @@ let asmsyntax="nasm"
 let g:syntastic_nasm_nasm_args = '-f elf32'
 
 
-"---------- Swift Config ----------
-" syntastic for swift
-let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
-
-
 "---------- Python Config ----------
 " Make python code look pretty
 let python_highlight_all=1
@@ -177,7 +161,7 @@ let python_highlight_all=1
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
 
-" Favour Python 3 syntax
+" Favor Python 3 syntax
 let g:syntastic_python_python_exec = 'python3'
 
 " Use UNIX (\n) line endings.
@@ -199,16 +183,13 @@ let g:clang_complete_macros = 1
 
 
 "---------- C++ Config ----------
-"let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
-"let g:cpp_experimental_template_highlight = 1
 :command ClangFormat execute '%!/usr/bin/clang-format -style=file'
 autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
 
 "---------- Black ----------
-let g:black_linelength = 99
-let g:black_skip_string_normalization = 1
+"let g:black_linelength = 99
+"let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
 
 " Use the following to allow post save and use any pyproject.toml config
@@ -225,6 +206,7 @@ autocmd BufWritePre *.py execute ':Isort'
 " toggle with :IndentLinesToggle
 "let g:indentLine_enabled = 0
 "```set list listchars=tab:»·,trail:·,nbsp:· " Whitespace```
+
 
 "---------- Markdown ---------
 " Disable conceallevel for markdown files
