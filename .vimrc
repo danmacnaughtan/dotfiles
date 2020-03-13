@@ -181,9 +181,9 @@ autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 "let g:black_skip_string_normalization = 1
 "autocmd BufWritePre *.py execute ':Black'
 
-" I think Black is working on finding the pyproject.toml when running `:Black`, but ATM
-" this isn't working. As a workaround, we can use the following to allow post save and use
-" any pyproject.toml config:
+" I think Black project maintainers are working on finding the pyproject.toml when running
+" `:Black`, but ATM this isn't working. As a workaround, we can use the following to allow
+" post save and use any pyproject.toml config:
 :command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
 autocmd BufWritePost *.py execute ':CustomBlack'
 
@@ -230,7 +230,7 @@ else
     " System clipboard using '*' register
     set clipboard=unnamedplus
     " Prevent copied text from being removed from the clipboard when vim closes
-    autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
+    "autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
 endif
 
 " Remove swap file
