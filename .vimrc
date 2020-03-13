@@ -15,10 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/syntastic'
-" Python auto-formatting
-Plugin 'psf/black'
-Plugin 'fisadev/vim-isort'
-Plugin 'cespare/vim-toml'
 " Autocomplete
 " Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
 " and execute ./install.sh --clang-completer
@@ -50,6 +46,12 @@ Plugin 'junegunn/fzf.vim'
 " Better Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+" Python auto-formatting
+"   Due to issue: https://github.com/psf/black/issues/1304
+"   Use commit `ce14fa8`
+Plugin 'psf/black'
+Plugin 'fisadev/vim-isort'
+Plugin 'cespare/vim-toml'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
