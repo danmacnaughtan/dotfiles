@@ -2,6 +2,7 @@
 
 call plug#begin('~/.vim/plugged')
 
+" General improvements
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'wincent/terminus'
@@ -10,7 +11,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 
 " Autocomplete
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --rust-completer --java-completer --go-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --rust-completer --java-completer' }
 
 " Python
 Plug 'nvie/vim-flake8'
@@ -18,12 +19,12 @@ Plug 'vim-scripts/indentpython.vim'
 " Due to issue: https://github.com/psf/black/issues/1304
 Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
 Plug 'fisadev/vim-isort'
-Plug 'cespare/vim-toml'
 
 " Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+" Other language support
 Plug 'vim-scripts/django.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
@@ -32,6 +33,7 @@ Plug 'mxw/vim-jsx'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'rhysd/vim-crystal'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
