@@ -1,64 +1,44 @@
-"---------- Vundle ----------
-set nocompatible " required
-filetype off " required
+"---------- Vim-Plug ----------{{{
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'wincent/terminus'
+Plug 'Yggdroot/indentLine'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf.vim'
 
-" Add all your plugins here
-
-" Python syntax checking
-Plugin 'nvie/vim-flake8'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'scrooloose/syntastic'
 " Autocomplete
-" Don't forget to navigate to ~/.vim/bundle/YouCompleteMe,
-" and execute ./install.sh --clang-completer
-" on arch use ./install.py --clang-completer --system-libclang
-" --java-completer --rust-completer --go-completer --ts-completer
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-" filesystem
-Plugin 'scrooloose/nerdtree'
-" Vim enhanced (with mouse improvments)
-Plugin 'wincent/terminus'
-" Ruby/Crystal support
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'rhysd/vim-crystal'
-" JavaScript/JSON/Vue/SCSS support
-Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
-Plugin 'posva/vim-vue'
-Plugin 'mxw/vim-jsx'
-Plugin 'cakebaker/scss-syntax.vim'
-" Django
-Plugin 'vim-scripts/django.vim'
-" Indent lines
-Plugin 'Yggdroot/indentLine'
-" Status line
-Plugin 'itchyny/lightline.vim'
-" Better search
-Plugin 'junegunn/fzf.vim'
-" Better Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-" Python auto-formatting
-"   Due to issue: https://github.com/psf/black/issues/1304
-"   Use commit `ce14fa8`
-Plugin 'psf/black'
-Plugin 'fisadev/vim-isort'
-Plugin 'cespare/vim-toml'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --rust-completer --java-completer --go-completer' }
 
-" All of your Plugins must be added before the following line
-call vundle#end() " required
-filetype plugin indent on " required
+" Python
+Plug 'nvie/vim-flake8'
+Plug 'vim-scripts/indentpython.vim'
+" Due to issue: https://github.com/psf/black/issues/1304
+Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+Plug 'fisadev/vim-isort'
+Plug 'cespare/vim-toml'
 
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
-"-------- Configuring auto-complete plugin --------
+Plug 'vim-scripts/django.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'posva/vim-vue'
+Plug 'mxw/vim-jsx'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'vim-ruby/vim-ruby'
+Plug 'rhysd/vim-crystal'
+
+call plug#end()
+
+"}}}
+
+"---------- YCM  ----------{{{
+
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
@@ -67,66 +47,61 @@ let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 let g:ycm_max_diagnostics_to_display = 1000
-
-" find the right python for the completion
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
     let g:ycm_python_binary_path='python3'
 else
     let g:ycm_python_binary_path='python'
 endif
 
+"}}}
 
-"---------- Rust Config ----------
+"---------- Rust ----------{{{
+
 let g:ycm_rust_src_path=system('rustc --print sysroot')+'/lib/rustlib/src/rust/src'
 
+"}}}
 
-"---------- Ruby Config ----------
+"---------- Ruby ----------{{{
+
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-" For rails style using tabs with 2 spaces
+"autocmd FileType ruby,eruby set tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType ruby,eruby set tabstop=2 softtabstop=2 shiftwidth=2
 
+"}}}
 
-"---------- JavaScript Config ----------
-" Front-end devs seem to like using tabs with 2 spaces
+"---------- JavaScript ----------{{{
+
+let g:vim_json_syntax_conceal = 0
+
 autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType json set tabstop=4 softtabstop=4 shiftwidth=4
 "autocmd FileType javascript set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
+
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
-" Enabled by default. flip the value to make completion matches case insensitive
-let g:vimjs#casesensistive = 1
-" Disabled by default. Enabling this will let vim complete matches at any location
-" e.g. typing 'ocument' will suggest 'document' if enabled.
-let g:vimjs#smartcomplete = 1
-" Disabled by default. Toggling this will enable completion for a number of
-" Chrome's JavaScript extension APIs
-let g:vimjs#chromeapis = 1
-" disable json syntax conceal
-let g:vim_json_syntax_conceal = 0
 
+"}}}
 
-"---------- Django Config ----------
+"---------- Django ----------{{{
+
 autocmd FileType htmldjango set tabstop=2 softtabstop=2 shiftwidth=2
 
+"}}}
 
-"---------- Custom Keys ----------
+"---------- Custom Keys ----------{{{
+
 let mapleader = " "
+
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>h :YcmCompleter GetDoc<CR>
 map <leader>t :NERDTreeToggle<CR>
 
-" Here is my writting notes mode, on and off
-set tw=90
 map <leader>w :set tw=90<CR>:set linebreak<CR>:set spell spelllang=en_us<CR>
 map <leader>W :set tw=90<CR>:set nolinebreak<CR>:set nospell<CR>
-
-" toggle ycm on and off
-"nnoremap <leader>y :let g:ycm_auto_trigger=0<CR> " turn off ycm
-"nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR> " turn on ycm
 
 " Start FZF (if installed)
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
@@ -134,28 +109,30 @@ if substitute(system('uname'), '\n', '', '') == 'Darwin'
 endif
 map <C-p> :FZF<CR>
 
+"}}}
 
-"---------- Custom Commnads ----------
+"---------- Custom Commands ----------{{{
+
 " Here is a command for auto-formatting json
 :command FormatJSON execute '%!python -m json.tool' | w
+
 " Command for quickly setting django-template filetype
 :command DjangoSetFiletype execute ':setfiletype htmldjango'
 
 " YCM FixIt command
 :command FixIt execute ':YcmCompleter FixIt'
 
+"}}}
 
-"---------- Makefile Config ----------
+"---------- Makefile ----------{{{
+
 " Remove expandtab for makefiles
 autocmd FileType Makefile set noexpandtab
 
+"}}}
 
-"---------- ASM Config ----------
-let asmsyntax="nasm"
-let g:syntastic_nasm_nasm_args = '-f elf32'
+"---------- Python ----------{{{
 
-
-"---------- Python Config ----------
 " Make python code look pretty
 let python_highlight_all=1
 
@@ -169,75 +146,98 @@ let g:syntastic_python_python_exec = 'python3'
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
+"}}}
 
-"---------- Docker Config ----------
-" Syntax highlighting for Dockerfiles with custom names
-" (e.g., 'Dockerfile-foobar')
+"---------- Docker ----------{{{
+
+" Syntax highlighting for Dockerfiles with custom names (e.g., 'Dockerfile-foobar')
 au BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 
+"}}}
 
-"---------- NASM Config ----------
-au BufRead,BufNewFile *.asm set filetype=nasm
+"---------- ASM ----------{{{
 
+autocmd BufNewFile,BufRead *.asm set filetype=nasm
+let asmsyntax="nasm"
+let g:syntastic_nasm_nasm_args = '-f elf32'
 
-"---------- clang Config ----------
+"}}}
+
+"---------- Clang/C/C++ ----------{{{
+
+" Allow autocomplete to see functions defined with macros
 let g:clang_complete_macros = 1
 
-
-"---------- C++ Config ----------
 :command ClangFormat execute '%!/usr/bin/clang-format -style=file'
 autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
+"}}}
 
-"---------- Black ----------
+"---------- Black ----------{{{
+
 "let g:black_linelength = 99
 "let g:black_skip_string_normalization = 1
-autocmd BufWritePre *.py execute ':Black'
+"autocmd BufWritePre *.py execute ':Black'
 
-" Use the following to allow post save and use any pyproject.toml config
-":command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
-"autocmd BufWritePost *.py execute ':CustomBlack'
+" I think Black is working on finding the pyproject.toml when running `:Black`, but ATM
+" this isn't working. As a workaround, we can use the following to allow post save and use
+" any pyproject.toml config:
+:command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
+autocmd BufWritePost *.py execute ':CustomBlack'
 
+"}}}
 
-"---------- isort ----------
+"---------- isort ----------{{{
+
 let g:vim_isort_map = ''
 autocmd BufWritePre *.py execute ':Isort'
 
+"}}}
 
-"---------- Visible tab indents ---------
+"---------- Visible tab indents ---------{{{
+
 " toggle with :IndentLinesToggle
 "let g:indentLine_enabled = 0
 "```set list listchars=tab:»·,trail:·,nbsp:· " Whitespace```
 
+"}}}
 
-"---------- Markdown ---------
+"---------- Markdown ---------{{{
+
 " Disable conceallevel for markdown files
 autocmd FileType markdown let g:indentLine_setConceal = 0
 let g:vim_markdown_folding_disabled = 1
 
+"}}}
 
-"---------- General Config ---------
-" use the system clipboard
-" for systems using the '+' register
-"set clipboard=unnamedplus 
-" for systems using the '*' register
-"set clipboard=unnamed
+"---------- Vimrc ----------{{{
+
+autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
+
+"}}}
+
+"---------- General ----------{{{
+
+set textwidth=90
+
+" Clipboard
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
+    " System clipboard using '+' register
     set clipboard=unnamed
 else
+    " System clipboard using '*' register
     set clipboard=unnamedplus
-    " Prevent copied text from being removed from the clipboard when vim
-    " closes
+    " Prevent copied text from being removed from the clipboard when vim closes
     autocmd VimLeave * call system("xclip -sel clip", getreg('+'))
 endif
 
-" remove swap file
+" Remove swap file
 set noswapfile
 
 " UTF8 Support
 set encoding=utf-8
 
-" tab configurations
+" Tab configurations
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -272,8 +272,10 @@ set sidescroll=5
 " Disable comment auto-formatting
 autocmd FileType * setlocal formatoptions-=cro
 
+"}}}
 
-"---------- Themes/Appearance ----------
+"---------- Themes/Appearance ----------{{{
+
 set t_Co=256
 set number
 syntax on
@@ -282,3 +284,5 @@ set background=dark
 
 let g:jellybeans_overrides = {'background':{'ctermbg':'none','256ctermbg':'none'}}
 colorscheme jellybeans
+
+"}}}
