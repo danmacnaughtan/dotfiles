@@ -2,38 +2,20 @@
 
 call plug#begin('~/.vim/plugged')
 
-" General improvements
-Plug 'scrooloose/syntastic'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'wincent/terminus'
 Plug 'Yggdroot/indentLine'
+Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
-
-" Autocomplete
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --rust-completer --java-completer' }
 
 " Python
-Plug 'nvie/vim-flake8'
-Plug 'vim-scripts/indentpython.vim'
-" Due to issue: https://github.com/psf/black/issues/1304
-Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'fisadev/vim-isort'
-
-" Markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-" Other language support
 Plug 'vim-scripts/django.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'posva/vim-vue'
-Plug 'mxw/vim-jsx'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'vim-ruby/vim-ruby'
-Plug 'rhysd/vim-crystal'
-Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -49,6 +31,7 @@ let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_global_ycm_extra_conf='~/.ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0
 let g:ycm_max_diagnostics_to_display = 1000
+let g:ycm_auto_hover=''
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
     let g:ycm_python_binary_path='python3'
 else
@@ -135,16 +118,6 @@ autocmd FileType Makefile set noexpandtab
 
 "---------- Python ----------{{{
 
-" Make python code look pretty
-let python_highlight_all=1
-
-" flake8 setup
-let g:flake8_show_in_gutter=1
-let g:flake8_show_in_file=1
-
-" Favor Python 3 syntax
-let g:syntastic_python_python_exec = 'python3'
-
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
@@ -175,15 +148,16 @@ autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
 "}}}
 
+"---------- GLSL ----------{{{
+
+autocmd! BufNewFile,BufRead *.vs,*.fs set filetype=glsl
+
+"}}}
+
 "---------- Black ----------{{{
 
-"let g:black_linelength = 99
-"let g:black_skip_string_normalization = 1
 "autocmd BufWritePre *.py execute ':Black'
 
-" I think Black project maintainers are working on finding the pyproject.toml when running
-" `:Black`, but ATM this isn't working. As a workaround, we can use the following to allow
-" post save and use any pyproject.toml config:
 :command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
 autocmd BufWritePost *.py execute ':CustomBlack'
 
