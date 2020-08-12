@@ -14,7 +14,6 @@ Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-com
 
 " Python
 Plug 'psf/black', { 'branch': 'stable' }
-Plug 'fisadev/vim-isort'
 Plug 'vim-scripts/django.vim'
 
 call plug#end()
@@ -121,6 +120,17 @@ autocmd FileType Makefile set noexpandtab
 " Use UNIX (\n) line endings.
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
+"isort
+"let g:vim_isort_map = ''
+"autocmd BufWritePre *.py execute ':Isort'
+:command CustomIsort execute ':call system("isort --lines-after-imports 2 " . bufname("%"))' | e
+autocmd BufWritePost *.py execute ':CustomIsort'
+
+"Black
+"autocmd BufWritePre *.py execute ':Black'
+:command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
+autocmd BufWritePost *.py execute ':CustomBlack'
+
 "}}}
 
 "---------- Docker ----------{{{
@@ -151,22 +161,6 @@ autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 "---------- GLSL ----------{{{
 
 autocmd! BufNewFile,BufRead *.vs,*.fs set filetype=glsl
-
-"}}}
-
-"---------- Black ----------{{{
-
-"autocmd BufWritePre *.py execute ':Black'
-
-:command CustomBlack execute ':call system("~/.vim/black/bin/black " . bufname("%"))' | e
-autocmd BufWritePost *.py execute ':CustomBlack'
-
-"}}}
-
-"---------- isort ----------{{{
-
-let g:vim_isort_map = ''
-autocmd BufWritePre *.py execute ':Isort'
 
 "}}}
 
