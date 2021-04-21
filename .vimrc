@@ -10,7 +10,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --rust-completer --java-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --rust-completer --ts-completer --java-completer --go-completer' }
 
 " Python
 Plug 'psf/black', { 'branch': 'stable' }
@@ -41,7 +41,15 @@ endif
 
 "---------- Rust ----------{{{
 
-let g:ycm_rust_src_path=system('rustc --print sysroot')+'/lib/rustlib/src/rust/src'
+let g:ycm_language_server =
+\ [
+\   {
+\     'name': 'rust',
+\     'cmdline': ['rust-analyzer'],
+\     'filetypes': ['rust'],
+\     'project_root_files': ['Cargo.toml']
+\   }
+\ ]
 
 "}}}
 
@@ -150,11 +158,19 @@ let g:syntastic_nasm_nasm_args = '-f elf32'
 
 "---------- Clang/C/C++ ----------{{{
 
+let g:c_syntax_for_h = 1
+
 " Allow autocomplete to see functions defined with macros
 let g:clang_complete_macros = 1
 
 :command ClangFormat execute '%!/usr/bin/clang-format -style=file'
-autocmd FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
+au FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
+
+"}}}
+
+"---------- Groff ----------{{{
+
+autocmd! BufNewFile,BufRead *.tr,*.roff,*.groff set ft=groff
 
 "}}}
 
