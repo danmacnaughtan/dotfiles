@@ -72,6 +72,7 @@ autocmd FileType css,html,vue set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType json set tabstop=4 softtabstop=4 shiftwidth=4
 "autocmd FileType javascript set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType svelte set tabstop=2 softtabstop=2 shiftwidth=2
 
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
@@ -204,7 +205,7 @@ autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
 
 "---------- General ----------{{{
 
-set textwidth=90
+set textwidth=99
 
 " Clipboard
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
