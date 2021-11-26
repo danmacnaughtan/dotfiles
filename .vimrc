@@ -142,6 +142,28 @@ autocmd BufWritePost *.py execute ':CustomBlack'
 
 "}}}
 
+"---------- Java ----------{{{
+
+" Java completer and syntax checker using YCM (jdt.ls) requires JDK11
+" https://wiki.archlinux.org/title/Java#Switching_between_JVM
+
+" Disable syntastic checkers in favor of YCM
+let g:syntastic_java_checkers = []
+
+" Disable eclim diagnostics in favor of YCM
+let g:EclimFileTypeValidate = 0
+
+" Better syntax highlighting
+let java_highlight_functions = 1
+let java_highlight_all = 1
+
+" Some more highlights...
+highlight link javaScopeDecl Statement
+highlight link javaType Type
+highlight link javaDocTags PreProc
+
+"}}}
+
 "---------- Docker ----------{{{
 
 " Syntax highlighting for Dockerfiles with custom names (e.g., 'Dockerfile-foobar')
