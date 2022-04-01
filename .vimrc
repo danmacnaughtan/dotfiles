@@ -11,6 +11,7 @@ Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --rust-completer --ts-completer --java-completer --go-completer' }
+Plug 'hashivim/vim-terraform'
 
 " Python
 Plug 'psf/black', { 'branch': 'stable' }
@@ -189,6 +190,8 @@ let g:clang_complete_macros = 1
 :command ClangFormat execute '%!/usr/bin/clang-format -style=file'
 au FileType h,hpp,c,cpp,cc set tabstop=4 softtabstop=4 shiftwidth=4
 
+let c_no_curly_error = 1
+
 "}}}
 
 "---------- Groff ----------{{{
@@ -219,6 +222,13 @@ let g:vim_markdown_folding_disabled = 1
 
 "}}}
 
+"---------- Terraform ---------{{{
+
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
+
+"}}}
+
 "---------- Vimrc ----------{{{
 
 autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
@@ -227,7 +237,7 @@ autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
 
 "---------- General ----------{{{
 
-set textwidth=99
+set textwidth=90
 
 " Clipboard
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
