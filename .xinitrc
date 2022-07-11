@@ -10,4 +10,6 @@ setxkbmap -option caps:escape
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
+nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+
 exec startxfce4
