@@ -52,6 +52,15 @@ let g:ycm_language_server =
 \   }
 \ ]
 
+:command CustomCargoFmt execute ':call system("cargo fmt")' | e
+autocmd BufWritePost *.rs execute ':CustomCargoFmt'
+
+"}}}
+
+"---------- Racket ----------{{{
+
+let g:syntastic_enable_racket_racket_checker = 1
+
 "}}}
 
 "---------- Ruby ----------{{{
