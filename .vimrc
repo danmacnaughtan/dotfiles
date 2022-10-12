@@ -57,6 +57,13 @@ autocmd BufWritePost *.rs execute ':CustomCargoFmt'
 
 "}}}
 
+"---------- Go ----------{{{
+
+:command CustomGoFmt execute ':call system("gofmt -w " . bufname("%"))' | e
+autocmd BufWritePost *.go execute ':CustomGoFmt'
+
+"}}}
+
 "---------- Racket ----------{{{
 
 let g:syntastic_enable_racket_racket_checker = 1
@@ -226,7 +233,8 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set filetype=glsl
 "---------- Markdown ---------{{{
 
 " Disable conceallevel for markdown files
-autocmd FileType markdown let g:indentLine_setConceal = 0
+autocmd FileType markdown let g:indentLine_setConceal=0
+autocmd FileType markdown set conceallevel=0
 let g:vim_markdown_folding_disabled = 1
 
 "}}}
