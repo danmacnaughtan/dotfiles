@@ -12,10 +12,12 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --rust-completer --ts-completer --java-completer --go-completer' }
 Plug 'hashivim/vim-terraform'
-
-" Python
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'vim-scripts/django.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'psf/black', {'branch': 'main'}
+Plug 'HiPhish/guile.vim'
+Plug 'jpalardy/vim-slime', {'branch': 'main'}
+Plug 'kaarmu/typst.vim', {'branch': 'main'}
+Plug 'wuelnerdotexe/vim-astro', {'branch': 'main'}
 
 call plug#end()
 
@@ -110,8 +112,8 @@ map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>h :YcmCompleter GetDoc<CR>
 map <leader>t :NERDTreeToggle<CR>
 
-map <leader>w :set tw=90<CR>:set linebreak<CR>:set spell spelllang=en_us<CR>
-map <leader>W :set tw=90<CR>:set nolinebreak<CR>:set nospell<CR>
+map <leader>w :set tw=79<CR>:set linebreak<CR>:set spell spelllang=en_us<CR>
+map <leader>W :set tw=79<CR>:set nolinebreak<CR>:set nospell<CR>
 
 " Start FZF (if installed)
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
@@ -230,6 +232,13 @@ autocmd! BufNewFile,BufRead *.vs,*.fs set filetype=glsl
 
 "}}}
 
+"---------- Terminus ----------{{{
+
+" disable focus reporting
+let g:TerminusFocusReporting=0
+
+"}}}
+
 "---------- Markdown ---------{{{
 
 " Disable conceallevel for markdown files
@@ -246,6 +255,26 @@ let g:terraform_align = 1
 
 "}}}
 
+"---------- Guile ---------{{{
+
+autocmd BufRead,BufNewFile *.scm set ft=scheme.guile
+
+let g:slime_target = "vimterminal"
+"let g:slime_target = "tmux"
+let g:slime_vimterminal_config = {"term_finish": "close"}
+
+command GuileTerminal rightbelow vertical terminal guile
+
+" To generate the etags
+" find /usr/share/guile/ -name '*.scm' -exec etags -a {} \;
+" use CTRL-n or CTRL-x o, etc
+" TODO: need an auto-tag creation routine--then things will be perf
+" https://stackoverflow.com/questions/155449/vim-auto-generate-ctags
+autocmd BufRead,BufNewFile *.scm set omnifunc=ccomplete#Complete
+autocmd BufRead,BufNewFile *.scm set tags+=$HOME/.local/share/guile/TAGS
+
+"}}}
+
 "---------- Vimrc ----------{{{
 
 autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
@@ -254,7 +283,7 @@ autocmd BufNewFile,BufRead *vimrc set foldmethod=marker
 
 "---------- General ----------{{{
 
-set textwidth=90
+set textwidth=79
 
 " Clipboard
 if substitute(system('uname'), '\n', '', '') == 'Darwin'
