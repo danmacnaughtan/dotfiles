@@ -18,6 +18,10 @@ Plug 'HiPhish/guile.vim'
 Plug 'jpalardy/vim-slime', {'branch': 'main'}
 Plug 'kaarmu/typst.vim', {'branch': 'main'}
 Plug 'wuelnerdotexe/vim-astro', {'branch': 'main'}
+Plug 'habamax/vim-godot'
+Plug 'othree/html5.vim' " dep vim-svelte
+Plug 'pangloss/vim-javascript' "dep vim-svelte
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 call plug#end()
 
@@ -95,6 +99,12 @@ autocmd FileType svelte set tabstop=2 softtabstop=2 shiftwidth=2
 
 " Vue specific highlighting fix
 autocmd FileType vue syntax sync fromstart
+
+"}}}
+
+"---------- Svelte ----------{{{
+
+let g:svelte_preprocessors = ['typescript']
 
 "}}}
 
@@ -272,6 +282,25 @@ command GuileTerminal rightbelow vertical terminal guile
 " https://stackoverflow.com/questions/155449/vim-auto-generate-ctags
 autocmd BufRead,BufNewFile *.scm set omnifunc=ccomplete#Complete
 autocmd BufRead,BufNewFile *.scm set tags+=$HOME/.local/share/guile/TAGS
+
+"}}}
+
+"---------- Godot ---------{{{
+
+if !has_key( g:, 'ycm_language_server' )
+  let g:ycm_language_server = []
+endif
+
+let g:ycm_language_server += [
+  \   {
+  \     'name': 'godot',
+  \     'filetypes': [ 'gdscript' ],
+  \     'project_root_files': [ 'project.godot' ],
+  \     'port': 6005
+  \   }
+  \ ]
+
+autocmd FileType gdscript set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 "}}}
 
